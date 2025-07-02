@@ -1,94 +1,347 @@
 
 <img width="1200" alt="cb-big2" src="https://github.com/user-attachments/assets/bd8c5f03-e91d-4ee5-b680-57355da204d1" />
 
-# Chatterbox TTS
+# 🗣️ Chatterbox TTS - Local Deployment
 
-[![Alt Text](https://img.shields.io/badge/listen-demo_samples-blue)](https://resemble-ai.github.io/chatterbox_demopage/)
-[![Alt Text](https://huggingface.co/datasets/huggingface/badges/resolve/main/open-in-hf-spaces-sm.svg)](https://huggingface.co/spaces/ResembleAI/Chatterbox)
-[![Alt Text](https://static-public.podonos.com/badges/insight-on-pdns-sm-dark.svg)](https://podonos.com/resembleai/chatterbox)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat&logo=fastapi)](https://fastapi.tiangolo.com)
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white)](https://streamlit.io)
 [![Discord](https://img.shields.io/discord/1377773249798344776?label=join%20discord&logo=discord&style=flat)](https://discord.gg/rJq9cRJBJ6)
 
-_Made with ♥️ by <a href="https://resemble.ai" target="_blank"><img width="100" alt="resemble-logo-horizontal" src="https://github.com/user-attachments/assets/35cf756b-3506-4943-9c72-c05ddfa4e525" /></a>
+A production-ready local deployment of **Chatterbox TTS** by Resemble AI with FastAPI backend and Streamlit frontend, featuring voice cloning capabilities and optimized for Apple Silicon Macs.
 
-We're excited to introduce Chatterbox, [Resemble AI's](https://resemble.ai) first production-grade open source TTS model. Licensed under MIT, Chatterbox has been benchmarked against leading closed-source systems like ElevenLabs, and is consistently preferred in side-by-side evaluations.
+_Made with ♥️ by [Resemble AI](https://resemble.ai) | Enhanced for local deployment_
 
-Whether you're working on memes, videos, games, or AI agents, Chatterbox brings your content to life. It's also the first open source TTS model to support **emotion exaggeration control**, a powerful feature that makes your voices stand out. Try it now on our [Hugging Face Gradio app.](https://huggingface.co/spaces/ResembleAI/Chatterbox)
+## ✨ Features
 
-If you like the model but need to scale or tune it for higher accuracy, check out our competitively priced TTS service (<a href="https://resemble.ai">link</a>). It delivers reliable performance with ultra-low latency of sub 200ms—ideal for production use in agents, applications, or interactive media.
+- 🎯 **State-of-the-art TTS**: Based on Resemble AI's Chatterbox model
+- 🎭 **Voice Cloning**: Upload reference audio to clone any voice
+- 🚀 **Apple Silicon Optimized**: Automatic MPS acceleration on M1/M2/M3/M4 Macs
+- 🔄 **FastAPI Backend**: RESTful API for easy integration
+- 🎨 **Beautiful UI**: Streamlit-based web interface
+- ⚙️ **Advanced Controls**: Emotion exaggeration, temperature, CFG weight, and more
+- 📦 **Easy Setup**: One-command installation with UV package manager
+- 🔒 **Secure**: Isolated virtual environment with pinned dependencies
 
-# Key Details
-- SoTA zeroshot TTS
-- 0.5B Llama backbone
-- Unique exaggeration/intensity control
-- Ultra-stable with alignment-informed inference
-- Trained on 0.5M hours of cleaned data
-- Watermarked outputs
-- Easy voice conversion script
-- [Outperforms ElevenLabs](https://podonos.com/resembleai/chatterbox)
+## 🖼️ Screenshots
 
-# Tips
-- **General Use (TTS and Voice Agents):**
-  - The default settings (`exaggeration=0.5`, `cfg_weight=0.5`) work well for most prompts.
-  - If the reference speaker has a fast speaking style, lowering `cfg_weight` to around `0.3` can improve pacing.
+### Main Interface
+The Streamlit interface provides an intuitive way to generate speech with various parameters:
 
-- **Expressive or Dramatic Speech:**
-  - Try lower `cfg_weight` values (e.g. `~0.3`) and increase `exaggeration` to around `0.7` or higher.
-  - Higher `exaggeration` tends to speed up speech; reducing `cfg_weight` helps compensate with slower, more deliberate pacing.
+- **Text Input**: Support for up to 500 characters
+- **Voice Cloning**: Optional reference audio upload
+- **Parameter Controls**: Exaggeration, CFG/Pace, temperature, and advanced sampling options
+- **Real-time Preview**: Instant audio playback and download
 
+### API Documentation
+FastAPI automatically generates interactive API documentation available at `http://localhost:8000/docs`
 
-# Installation
-```shell
-pip install chatterbox-tts
+## 🛠️ Prerequisites
+
+- **Python**: 3.9 or higher
+- **macOS**: Recommended (optimized for Apple Silicon)
+- **UV Package Manager**: For fast, reliable dependency management
+- **Git**: For cloning the repository
+
+### Install UV (if not already installed)
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Alternatively, you can install from source:
-```shell
-# conda create -yn chatterbox python=3.11
-# conda activate chatterbox
+## 🚀 Quick Start
 
-git clone https://github.com/resemble-ai/chatterbox.git
-cd chatterbox
-pip install -e .
+### 1. Clone the Repository
+
+```bash
+git clone <your-repo-url>
+cd chatterbox-tts
 ```
-We developed and tested Chatterbox on Python 3.11 on Debain 11 OS; the versions of the dependencies are pinned in `pyproject.toml` to ensure consistency. You can modify the code or dependencies in this installation mode.
 
+### 2. Set Up Virtual Environment
 
-# Usage
+```bash
+# Create virtual environment with UV
+uv venv chatterbox-env
+
+# Activate the environment
+source chatterbox-env/bin/activate
+```
+
+### 3. Install Dependencies
+
+```bash
+# Install all dependencies using UV (much faster than pip)
+uv pip install --python chatterbox-env/bin/python -r requirements.txt
+
+# Install the Chatterbox package in development mode
+uv pip install --python chatterbox-env/bin/python -e . --no-deps
+```
+
+### 4. Start the Services
+
+#### Option A: Using the provided scripts (Recommended)
+
+```bash
+# Make scripts executable
+chmod +x run_fastapi.sh run_streamlit.sh
+
+# Start FastAPI server (in background)
+./run_fastapi.sh &
+
+# Start Streamlit app (in foreground)
+./run_streamlit.sh
+```
+
+#### Option B: Manual startup
+
+```bash
+# Terminal 1: Start FastAPI server
+source chatterbox-env/bin/activate
+python fastapi_tts_server.py
+
+# Terminal 2: Start Streamlit app
+source chatterbox-env/bin/activate
+streamlit run streamlit_app.py
+```
+
+### 5. Access the Application
+
+- **Streamlit UI**: http://localhost:8501
+- **FastAPI Docs**: http://localhost:8000/docs
+- **API Health Check**: http://localhost:8000/health
+
+## 📋 Detailed Setup Guide
+
+### System Requirements
+
+- **RAM**: 8GB minimum, 16GB recommended
+- **Storage**: 5GB free space for models
+- **Network**: Internet connection for initial model download
+
+### First Run
+
+On the first run, the system will:
+1. Download the Chatterbox TTS models (~3.2GB total)
+2. Initialize the voice encoder and speech tokenizer
+3. Load the models into memory
+
+**Note**: Initial model download may take 5-10 minutes depending on your internet connection.
+
+### Performance Optimization
+
+#### Apple Silicon Macs (M1/M2/M3/M4)
+- Automatically uses MPS (Metal Performance Shaders) for GPU acceleration
+- Typical generation time: 5-15 seconds for moderate text length
+
+#### Intel Macs / Other Systems
+- Falls back to CPU processing
+- Typical generation time: 15-45 seconds for moderate text length
+
+## 🎛️ API Usage
+
+### Basic Text-to-Speech
+
+```bash
+curl -X POST "http://localhost:8000/synthesize" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "text": "Hello, this is a test of Chatterbox TTS!",
+       "exaggeration": 0.5,
+       "cfg_weight": 0.5,
+       "temperature": 0.8
+     }'
+```
+
+### Voice Cloning
+
+```bash
+curl -X POST "http://localhost:8000/synthesize_with_voice" \
+     -F "text=Hello, this is my cloned voice!" \
+     -F "voice_file=@reference_audio.wav" \
+     -F "exaggeration=0.7" \
+     -F "cfg_weight=0.3"
+```
+
+### Python Integration
+
 ```python
-import torchaudio as ta
-from chatterbox.tts import ChatterboxTTS
+import requests
+import base64
 
-model = ChatterboxTTS.from_pretrained(device="cuda")
+# Basic TTS
+response = requests.post(
+    "http://localhost:8000/synthesize",
+    json={
+        "text": "Your text here",
+        "exaggeration": 0.5,
+        "cfg_weight": 0.5
+    }
+)
 
-text = "Ezreal and Jinx teamed up with Ahri, Yasuo, and Teemo to take down the enemy's Nexus in an epic late-game pentakill."
-wav = model.generate(text)
-ta.save("test-1.wav", wav, model.sr)
-
-# If you want to synthesize with a different voice, specify the audio prompt
-AUDIO_PROMPT_PATH = "YOUR_FILE.wav"
-wav = model.generate(text, audio_prompt_path=AUDIO_PROMPT_PATH)
-ta.save("test-2.wav", wav, model.sr)
+if response.status_code == 200:
+    data = response.json()
+    audio_bytes = base64.b64decode(data["audio_base64"])
+    
+    # Save audio file
+    with open("output.wav", "wb") as f:
+        f.write(audio_bytes)
 ```
-See `example_tts.py` and `example_vc.py` for more examples.
 
-# Supported Lanugage
-Currenlty only English.
+## ⚙️ Configuration Parameters
 
-# Acknowledgements
-- [Cosyvoice](https://github.com/FunAudioLLM/CosyVoice)
-- [Real-Time-Voice-Cloning](https://github.com/CorentinJ/Real-Time-Voice-Cloning)
-- [HiFT-GAN](https://github.com/yl4579/HiFTNet)
-- [Llama 3](https://github.com/meta-llama/llama3)
-- [S3Tokenizer](https://github.com/xingchensong/S3Tokenizer)
+### Core Parameters
 
-# Built-in PerTh Watermarking for Responsible AI
+| Parameter | Range | Default | Description |
+|-----------|-------|---------|-------------|
+| `exaggeration` | 0.25-2.0 | 0.5 | Controls emotional intensity and expression |
+| `cfg_weight` | 0.0-1.0 | 0.5 | Classifier-free guidance weight (affects pacing) |
+| `temperature` | 0.05-5.0 | 0.8 | Sampling temperature (creativity vs consistency) |
+
+### Advanced Parameters
+
+| Parameter | Range | Default | Description |
+|-----------|-------|---------|-------------|
+| `repetition_penalty` | 1.0-2.0 | 1.2 | Penalty for token repetition |
+| `min_p` | 0.0-1.0 | 0.05 | Minimum probability threshold |
+| `top_p` | 0.0-1.0 | 1.0 | Nucleus sampling parameter |
+
+### Parameter Tuning Tips
+
+- **For natural speech**: `exaggeration=0.5`, `cfg_weight=0.5`
+- **For expressive speech**: `exaggeration=0.7-1.0`, `cfg_weight=0.3-0.4`
+- **For fast speakers**: Lower `cfg_weight` to 0.3
+- **For dramatic content**: Higher `exaggeration` (0.8+)
+
+## 🎭 Voice Cloning Guide
+
+### Preparing Reference Audio
+
+**Best Practices:**
+- **Duration**: 3-30 seconds (optimal: 5-15 seconds)
+- **Quality**: Clear, noise-free recording
+- **Content**: Single speaker, natural speech
+- **Format**: WAV preferred, MP3/FLAC/M4A supported
+
+**Supported Formats:**
+- WAV (recommended)
+- MP3
+- FLAC
+- M4A
+
+### Voice Cloning Workflow
+
+1. **Record/Upload Reference**: Use a clear sample of the target voice
+2. **Set Parameters**: Adjust `exaggeration` and `cfg_weight` for best results
+3. **Generate**: Process your text with the cloned voice
+4. **Fine-tune**: Adjust parameters if needed for better quality
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+#### Server Won't Start
+```bash
+# Check if port 8000 is already in use
+lsof -i :8000
+
+# Kill existing process if needed
+kill -9 <PID>
+```
+
+#### Model Download Fails
+```bash
+# Clear cache and retry
+rm -rf ~/.cache/huggingface/
+python test_tts.py
+```
+
+#### Memory Issues
+- **Reduce batch size**: Use shorter text inputs
+- **Close other applications**: Free up RAM
+- **Check available memory**: 
+  ```bash
+  # macOS
+  vm_stat
+  ```
+
+#### MPS Not Available
+If you see "MPS not available" on Apple Silicon:
+- Update to macOS 12.3+
+- Update PyTorch: `pip install torch torchaudio --upgrade`
+
+### Performance Issues
+
+#### Slow Generation
+1. **Check device**: Verify MPS is being used (check logs)
+2. **Reduce text length**: Break long texts into smaller chunks
+3. **Adjust parameters**: Lower `temperature` and `exaggeration`
+
+#### Poor Quality Output
+1. **Check reference audio**: Ensure it's clear and noise-free
+2. **Adjust parameters**: Try different `cfg_weight` values
+3. **Experiment with settings**: Test various parameter combinations
+
+### Debug Mode
+
+Enable debug logging by setting environment variable:
+```bash
+export CHATTERBOX_DEBUG=1
+python fastapi_tts_server.py
+```
+
+## 📁 Project Structure
+
+```
+chatterbox-tts/
+├── src/chatterbox/           # Core TTS package
+├── fastapi_tts_server.py     # FastAPI backend server
+├── streamlit_app.py          # Streamlit frontend
+├── requirements.txt          # Python dependencies
+├── test_tts.py              # Basic functionality test
+├── run_fastapi.sh           # FastAPI startup script
+├── run_streamlit.sh         # Streamlit startup script
+├── chatterbox-env/          # Virtual environment
+└── README.md               # This file
+```
+
+## 🔒 Security Considerations
+
+- **Local Only**: Servers bind to localhost by default
+- **File Upload**: Reference audio files are processed locally and cleaned up
+- **No Data Persistence**: Generated audio is not stored permanently
+- **Isolated Environment**: Uses virtual environment for dependency isolation
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature-name`
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Resemble AI** for the original Chatterbox TTS model
+- **Hugging Face** for model hosting and transformers library
+- **FastAPI** and **Streamlit** communities for excellent frameworks
+- **Original Chatterbox Contributors**:
+  - [Cosyvoice](https://github.com/FunAudioLLM/CosyVoice)
+  - [Real-Time-Voice-Cloning](https://github.com/CorentinJ/Real-Time-Voice-Cloning)
+  - [HiFT-GAN](https://github.com/yl4579/HiFTNet)
+  - [Llama 3](https://github.com/meta-llama/llama3)
+  - [S3Tokenizer](https://github.com/xingchensong/S3Tokenizer)
+
+## 🔐 Built-in PerTh Watermarking for Responsible AI
 
 Every audio file generated by Chatterbox includes [Resemble AI's Perth (Perceptual Threshold) Watermarker](https://github.com/resemble-ai/perth) - imperceptible neural watermarks that survive MP3 compression, audio editing, and common manipulations while maintaining nearly 100% detection accuracy.
 
-
-## Watermark extraction
-
-You can look for the watermark using the following script.
+### Watermark extraction
 
 ```python
 import perth
@@ -108,10 +361,24 @@ print(f"Extracted watermark: {watermark}")
 # Output: 0.0 (no watermark) or 1.0 (watermarked)
 ```
 
+## 📞 Support
 
-# Official Discord
+- **Issues**: Open a GitHub issue for bugs or feature requests
+- **Discussions**: Use GitHub Discussions for questions and community support
+- **Original Discord**: 👋 Join [Resemble AI's Discord](https://discord.gg/rJq9cRJBJ6) for model-specific questions
 
-👋 Join us on [Discord](https://discord.gg/rJq9cRJBJ6) and let's build something awesome together!
+## 🚀 What's Next?
 
-# Disclaimer
-Don't use this model to do bad things. Prompts are sourced from freely available data on the internet.
+- [ ] Docker containerization
+- [ ] Multiple voice presets
+- [ ] Batch processing capabilities
+- [ ] Real-time streaming
+- [ ] Integration examples for popular frameworks
+
+## ⚠️ Disclaimer
+
+This tool is intended for legitimate and ethical use cases only. Please ensure you have proper consent before cloning someone's voice. The original training data comes from freely available sources on the internet.
+
+---
+
+**Made with ❤️ for the open source community**

@@ -1,6 +1,25 @@
 .vscode
 
-# Pylance
+# Python
+*.py[cod]
+*.so
+.Python
+
+# Virtual environments
+chatbtnv/
+*.pyc
+.venv/
+__pycache__/
+
+# Editor
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# audio
+*.wav
 pyrightconfig.json
 
 # Byte-compiled / optimized / DLL files
@@ -45,4 +64,36 @@ checkpoints/
 .gradio
 
 # Ignore generated sample .wav files
-**/*.wav
+
+# Our additions for local deployment
+chatterbox-env/
+.uv/
+uv.lock
+test_output.wav
+chatterbox_*.wav
+output*.wav
+*.mp3
+*.flac
+*.m4a
+
+# Model cache
+.cache/
+~/.cache/huggingface/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Streamlit
+.streamlit/
