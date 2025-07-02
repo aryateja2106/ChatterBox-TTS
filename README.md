@@ -55,8 +55,8 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repo-url>
-cd chatterbox-tts
+git clone https://github.com/aryateja2106/ChatterBox-TTS.git
+cd ChatterBox-TTS
 ```
 
 ### 2. Set Up Virtual Environment
