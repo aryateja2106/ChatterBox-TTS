@@ -1,58 +1,74 @@
-# 🗣️ ChatterBox TTS - Web Interface
+# 🗣️ ChatterBox TTS Web App
 
-**A modern web application for text-to-speech with voice cloning**
+**Turn text into speech with voice cloning - through a simple web interface**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-005571?logo=fastapi)](https://fastapi.tiangolo.com)
-[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit)](https://streamlit.io)
 
-> **Built by Arya Teja Rudraraju** • Inspired by [Resemble AI's Chatterbox](https://github.com/resemble-ai/chatterbox)
+> Built by **Arya Teja Rudraraju** | Powered by [Resemble AI's Chatterbox](https://github.com/resemble-ai/chatterbox)
 
-## 🎯 What This Project Does
+## What is this?
 
-I created this web application to make Resemble AI's incredible Chatterbox TTS technology easily accessible to everyone. Instead of complex command-line tools, you get:
+This is a **web application** that lets you:
+1. **Type text** → Get speech audio
+2. **Upload your voice** → Clone any voice 
+3. **Use an API** → Integrate with your apps
 
-- 🎨 **Beautiful Web Interface** - Clean, intuitive Streamlit UI
-- 🎭 **Voice Cloning Made Easy** - Drag & drop audio files to clone any voice
-- ⚡ **Apple Silicon Optimized** - Fast inference on M1/M2/M3/M4 Macs
-- 🚀 **API Endpoints** - FastAPI backend for integrating with other apps
-- 📱 **Modern Tech Stack** - Built with UV, FastAPI, and Streamlit
+Instead of complicated command-line tools, you get a simple website that just works.
 
-## 🚀 Quick Start
+## Why did I build this?
 
-### Prerequisites
-- Python 3.9+
-- [UV package manager](https://github.com/astral-sh/uv) (`curl -LsSf https://astral.sh/uv/install.sh | sh`)
+Resemble AI created amazing text-to-speech technology, but it was hard to use. I wanted:
+- ✅ A simple website instead of terminal commands
+- ✅ Easy voice cloning with drag & drop
+- ✅ Fast performance on Mac computers
+- ✅ API endpoints for developers
 
-### Installation
+## 🚀 How to Run
 
+### Step 1: Install Requirements
 ```bash
-# 1. Clone the repository
+# Install UV package manager (if you don't have it)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Make sure you have Python 3.9+
+python --version
+```
+
+### Step 2: Get the Code
+```bash
 git clone https://github.com/aryateja2106/ChatterBox-TTS.git
 cd ChatterBox-TTS
+```
 
-# 2. Create virtual environment
+### Step 3: Install Everything
+```bash
+# Create environment and install dependencies (this takes a few minutes)
 uv venv chatterbox-env
 source chatterbox-env/bin/activate
-
-# 3. Install dependencies
 uv pip install --python chatterbox-env/bin/python -r requirements.txt
 uv pip install --python chatterbox-env/bin/python -e . --no-deps
+```
 
-# 4. Start the servers
+### Step 4: Start the App
+```bash
+# Make scripts executable
 chmod +x run_fastapi.sh run_streamlit.sh
 
-# Terminal 1: Start API server
+# Open Terminal 1 and run:
 ./run_fastapi.sh
 
-# Terminal 2: Start web interface
+# Open Terminal 2 and run:
 ./run_streamlit.sh
 ```
 
-### Access Your Application
-- **Web Interface**: http://localhost:8501
-- **API Documentation**: http://localhost:8000/docs
+### Step 5: Use the App
+- **Open your browser**: http://localhost:8501
+- **Type some text** and click "Generate Speech"
+- **Done!** Your audio will appear below
+
+### Extra: API Access
+- **API Docs**: http://localhost:8000/docs
 - **Health Check**: http://localhost:8000/health
 
 ## 🎭 How to Use

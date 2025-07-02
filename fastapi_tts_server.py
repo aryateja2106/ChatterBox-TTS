@@ -5,6 +5,7 @@ FastAPI server for Chatterbox TTS with Mac support
 import os
 import io
 import base64
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
@@ -14,8 +15,6 @@ import numpy as np
 from chatterbox.tts import ChatterboxTTS
 import tempfile
 from typing import Optional
-
-app = FastAPI(title="Chatterbox TTS API", version="1.0.0")
 
 # Global model instance
 model = None
@@ -52,10 +51,21 @@ def init_model():
         model = ChatterboxTTS.from_pretrained(device=device)
         print(f"Model loaded successfully on {device}")
 
-@app.on_event("startup")
-async def startup_event():
-    """Initialize model on startup"""
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
     init_model()
+    yield
+    # Shutdown
+    pass
+
+# Create FastAPI app with lifespan
+app = FastAPI(
+    title="Chatterbox TTS API", 
+    version="1.0.0",
+    description="A modern API for text-to-speech with voice cloning capabilities",
+    lifespan=lifespan
+)
 
 @app.get("/")
 async def root():
