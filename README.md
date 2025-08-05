@@ -28,6 +28,9 @@ _Made with ♥️ by Arya Teja Rudraraju, inspired from  [Resemble AI's Chat
 
 [](https://github.com/aryateja2106/ChatterBox-TTS#%EF%B8%8F-screenshots)
 
+<img width="1825" height="922" alt="image" src="https://github.com/user-attachments/assets/aa0e168b-10f3-4ec5-8a28-674f9cf73c7b" />
+
+
 ### Main Interface
 
 [](https://github.com/aryateja2106/ChatterBox-TTS#main-interface)
