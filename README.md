@@ -23,7 +23,7 @@ _Made with ♥️ by Arya Teja Rudraraju, inspired from  [Resemble AI's Chat
 - 📦 **Easy Setup**: One-command installation with UV package manager
 - 🔒 **Secure**: Isolated virtual environment with pinned dependencies
 
-## 🖼️ Screenshots
+## 🖼️ Screenshot
 
 [](https://github.com/aryateja2106/ChatterBox-TTS#%EF%B8%8F-screenshots)
 
